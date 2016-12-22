@@ -1,9 +1,10 @@
 import requests
 import json
 
-api_url = 'https://api_endpoint_url'
-file_abs_url = '/file/absolute/path'
+api_endpoint_url = 'https://api_endpoint_url'
+
 auth_token = 'bearer_token'
+file_abs_url = '/file/absolute/path'
 
 payload = {
     'property1':'value1',
@@ -16,8 +17,8 @@ payload = {
 }
 
 files = {
-    'json_data': (None, json.dumps(payload), 'application/json'),
-    'file': ('file_abs_url', open('file_abs_url', 'rb'), 'application/octet-stream')
+    'race_details_json': (None, json.dumps(payload), 'application/json'),
+    'race_results_file': (file_abs_url, open(file_abs_url, 'rb'), 'application/octet-stream')
 }
 
 headers = {
@@ -25,6 +26,7 @@ headers = {
     'Authorization': 'Bearer ' + auth_token,
 }
 
-r = requests.post( api_url, files=files, headers=headers )
+r = requests.post( api_endpoint_url, files=files, headers=headers )
 
 print(r.text)
+
